@@ -1,11 +1,4 @@
-﻿function MyController($scope) {
-    var updateClock = function() {
-        $scope.clock = new Date();
-    };
-
-    setInterval(function() {
-        $scope.$apply(updateClock)
-    }, 1000);
-
-    updateClock();
-};
+﻿var app = angular.module("myApp", []);
+app.controller('MyController', function ($scope) {
+    $scope.name = 'Graham';
+});
