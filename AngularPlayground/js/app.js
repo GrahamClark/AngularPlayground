@@ -1,23 +1,21 @@
-﻿var app = angular.module("myApp", []);
-app.controller('FirstController', function ($scope) {
-    $scope.counter = 0;
+﻿angular.module('emailParser', [])
+    .factory('EmailParser', [
+        '$interpolate',
+        function($interpolate) {
+            return {
+                parse: function(text, context) {
+                    var template = $interpolate(text);
+                    return template(context);
+                }
+            }
+        }
+    ]);
 
-    $scope.add = function (amount) {
-        $scope.counter += amount;
-    };
-
-    $scope.subtract = function(amount) {
-        $scope.counter -= amount;
-    };
-});
-
-app.controller('ParentController', function($scope) {
-    $scope.person = { greeted: false };
-});
-
-app.controller('ChildController', function($scope) {
-    $scope.sayHello = function() {
-        $scope.person.name = 'Graham';
-        $scope.person.greeted = true;
-    };
-});
+angular.module('myApp', ['emailParser'])
+    .controller('PlayController', [
+        '$scope',
+        '$filter',
+        function($scope, $filter) {
+            $scope.name = $filter('lowercase')($scope.inName);
+        }
+    ]);

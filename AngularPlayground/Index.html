@@ -5,17 +5,11 @@
     <script src="scripts/angular.js"></script>
 </head>
 <body>
-    <div ng-controller="FirstController">
-        <button ng-click="add(1)">Add</button>
-        <a ng-click="subtract(1)">Subtract</a>
-        <p>Current count: {{ counter }}</p>
-    </div>
-    
-    <div ng-controller="ParentController">
-        <div ng-controller="ChildController">
-            <button ng-click="sayHello()">Say hello</button>
-        </div>
-        {{ person }}
+    <div ng-controller="PlayController">
+        <input ng-model="inName" type="text"/>
+        <p>{{ name }}</p>
+        <input ng-model="num" type="text"/>
+        <p>{{ num | number:2 }}</p>
     </div>
 
     <script src="js/app.js"></script>
