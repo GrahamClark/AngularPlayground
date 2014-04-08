@@ -2,15 +2,45 @@
 <html ng-app="myApp">
 <head>
     <title>AngularJS</title>
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/foundation/4.3.2/css/foundation.min.css">
+    <style type="text/css">
+        input.ng-invalid {
+            border: 1px solid red;
+        }
+
+        input.ng-valid {
+            border: 1px solid green;
+        }
+    </style>
     <script src="scripts/angular.js"></script>
 </head>
 <body>
     <div ng-controller="PlayController">
         <input ng-model="inName" type="text"/>
-        <p>{{ name }}</p>
+        <p>{{ name | limitTo:-10 }}</p>
         <input ng-model="num" type="text"/>
         <p>{{ num | number:2 }}</p>
+        <input ng-model="text" type="text"/>
+        <p>{{ text | lowercase | capitalise }}</p>
     </div>
+    
+    <form name="signup_form" novalidate ng-submit="signupForm()">
+        <fieldset>
+            <legend>Signup</legend>
+            <div class="row">
+                <div class="large-12 columns">
+                    <label>Your name</label>
+                    <input type="text" placeholder="Name" name="name" ng-model="signup.name" ng-minlength="3" ng-maxlength="20" required />
+                    <div class="error" ng-show="signup_form.name.$dirty && signup_form.name.$invalid">
+                        <small class="error" ng-show="signup_form.name.$error.required">Your name is required.</small>
+                        <small class="error" ng-show="signup_form.name.$error.minlength">Your name is required to be at least 3 characters.</small>
+                        <small class="error" ng-show="signup_form.name.$error.maxlength">Your name cannot be longer than 20 characters.</small>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="button radius">Submit</button>
+        </fieldset>
+    </form>
 
     <script src="js/app.js"></script>
 </body>

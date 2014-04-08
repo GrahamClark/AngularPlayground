@@ -11,11 +11,24 @@
         }
     ]);
 
-angular.module('myApp', ['emailParser'])
+angular.module('myApp.filters', [])
+    .filter('capitalise', function() {
+        return function(input) {
+            if (input) {
+                return input[0].toUpperCase() + input.slice(1);
+            }
+        }
+    });
+
+angular.module('myApp', ['emailParser', 'myApp.filters'])
     .controller('PlayController', [
         '$scope',
         '$filter',
-        function($scope, $filter) {
-            $scope.name = $filter('lowercase')($scope.inName);
+        function ($scope, $filter) {
+            $scope.$watch('inName', function(inName) {
+                if (inName) {
+                    $scope.name = $filter('lowercase')(inName);
+                }
+            });
         }
     ]);
