@@ -2,7 +2,7 @@
 <html ng-app="myApp">
 <head>
     <title>AngularJS</title>
-    <link rel="stylesheet" href="http://cdn.jsdelivr.net/foundation/4.3.2/css/foundation.min.css">
+    <link href="css/foundation.min.css" rel="stylesheet" />
     <style type="text/css">
         input.ng-invalid {
             border: 1px solid red;
@@ -38,7 +38,7 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="button radius">Submit</button>
+            <button type="submit" class="button radius" ng-disabled="!signup.name || signup_form.name.$invalid">Submit</button>
         </fieldset>
     </form>
     
